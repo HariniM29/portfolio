@@ -1,0 +1,2024 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        
+      
+:root {
+
+/**
+ * colors
+ */
+
+--raw-seinna: #63aeb36e;
+--sizzling-sunrise: hsl(51, 95%, 54%);
+--scarlet: hsl(13, 96%, 47%);
+--black: hsl(0, 0%, 0%);
+--white: hsl(0, 0%, 100%);
+
+/**
+ * typography
+ */
+
+--ff-saira-stencil-one: "Saira Stencil One", sans-serif; 
+--ff-poppins: 'Poppins', sans-serif;
+--ff-roboto: 'Roboto', sans-serif;
+
+--fs-1: 2rem;
+--fs-2: calc(1.813rem + 1vw);
+--fs-3: calc(1.313rem + 1vw);
+--fs-4: 1.4rem;
+--fs-5: 1rem;
+--fs-6: 0.813rem;
+--fs-7: 0.75rem;
+
+--fw-400: 400;
+--fw-700: 700;
+
+/**
+ * transition
+ */
+
+--transition-1: 0.25s ease-in-out;
+
+/**
+ * spacing
+ */
+
+--section-padding: 80px;
+
+/**
+ * radius
+ */
+
+--radius-4: 4px;
+--radius-12: 12px;
+
+}
+
+
+
+
+
+/*-----------------------------------*\
+* #THEME COLORS
+\*-----------------------------------*/
+
+body.dark_theme {
+
+
+--bg-secondary: hsl(0, 0%, 19%);
+
+
+--card-shadow: hsla(0, 0%, 0%, 0.4);
+
+
+--shadow-1: 10px 10px 40px var(--card-shadow);
+
+}
+
+body.light_theme {
+
+--bg-primary: hsl(0, 0%, 90%);
+--bg-secondary: hsl(0, 0%, 100%);
+--color-primary: hsl(0, 0%, 12%);
+--color-secondary: hsl(0, 0%, 37%);
+--card-shadow: hsla(0, 0%, 0%, 0.1);
+--input-bg: hsl(0, 0%, 93%);
+
+--shadow-1: 10px 10px 40px var(--card-shadow);
+
+}
+
+
+
+
+
+/*-----------------------------------*\
+* #RESET
+\*-----------------------------------*/
+
+*, *::before, *::after {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+li { list-style: none; }
+
+a { text-decoration: none; }
+
+a,
+/* img, */
+time,
+span,
+input,
+label,
+select,
+button,
+textarea,
+ion-icon { display: block; }
+
+input,
+button,
+select,
+textarea {
+background: none;
+border: none;
+font: inherit;
+}
+
+button,
+select { cursor: pointer; }
+
+input,
+textarea { width: 100%; }
+
+ion-icon { pointer-events: none; }
+
+:is(a, button, select) {
+outline-color: var(--scarlet);
+outline-offset: 3px;
+}
+
+::selection {
+background: var(--color-primary);
+color: var(--bg-primary);
+}
+
+html {
+font-family: var(--ff-roboto);
+scroll-behavior: smooth;
+}
+
+
+
+
+
+
+
+
+
+/*-----------------------------------*\
+* #REUSED STYLE
+\*-----------------------------------*/
+
+
+
+
+.h2,
+.h3,
+.h4 {
+color: var(--color-primary);
+font-family: var(--ff-poppins);
+line-height: 1.2;
+}
+
+.h2 { font-size: var(--fs-2); }
+
+.h3 { font-size: var(--fs-3); }
+
+.h4 { font-size: var(--fs-5); }
+
+.w-100 { width: 100%; }
+
+.btn {
+max-width: max-content;
+color: var(--color-primary);
+font-weight: var(--fw-700);
+text-transform: uppercase;
+letter-spacing: 0.5px;
+padding: 10px 25px;
+border: 1px solid transparent;
+border-radius: var(--radius-4);
+transition: var(--transition-1);
+}
+
+.btn-primary { border-color: var(--color-primary); }
+
+.btn-primary:is(:hover, :focus) {
+background: var(--color-primary);
+color: var(--bg-primary);
+}
+
+.btn-secondary {
+background: var(--raw-seinna);
+border-color: var(--raw-seinna);
+color: var(--black);
+}
+
+.btn-secondary:is(:hover, :focus) { --raw-seinna: hsl(24, 74%, 64%); }
+
+.section-subtitle {
+position: relative;
+color: var(--color-secondary);
+text-transform: uppercase;
+padding-bottom: 5px;
+margin-bottom: 20px;
+}
+
+.section-subtitle::after {
+content: "";
+position: absolute;
+top: 100%;
+left: 0;
+width: 60px;
+height: 2px;
+background: var(--color-secondary);
+}
+
+.section-title {
+max-width: 350px;
+margin-bottom: 30px;
+}
+
+.section-text {
+color: var(--color-secondary);
+line-height: 1.8;
+margin-bottom: 30px;
+}
+
+.tooltip {
+position: absolute;
+top: -40px;
+background: var(--raw-seinna);
+min-width: max-content;
+color: var(--white);
+font-size: 15px;
+font-weight: var(--fw-700);
+padding: 5px 10px;
+border-radius: var(--radius-4);
+box-shadow: var(--shadow-1);
+transform: translateY(-10px);
+opacity: 0;
+pointer-events: none;
+transition: var(--transition-1);
+z-index: 1;
+}
+
+
+
+
+
+
+.theme-btn {
+padding: 4px;
+width: 48px;
+background: var(--bg-secondary);
+border-radius: 100px;
+transition: var(--transition-1);
+}
+
+
+.theme-btn .icon {
+position: relative;
+left: 0;
+width: 20px;
+height: 20px;
+border-radius: 50px;
+box-shadow: inset 9px -6px var(--color-primary);
+transition: var(--transition-1);
+}
+
+.theme-btn.active .icon {
+left: 20px;
+box-shadow: inset 20px -20px var(--sizzling-sunrise);
+}
+
+
+
+
+
+
+
+/*-----------------------------------*\
+* #SKILLS
+\*-----------------------------------*/
+
+.skills { padding-block: var(--section-padding); }
+
+.skills-content { margin-bottom: 50px; }
+
+.skills-toggle {
+background: #00eeff1c;
+position: relative;
+width: max-content;
+margin-inline: auto;
+display: flex;
+align-items: center;
+padding: 5px;
+border-radius: 100px;
+box-shadow: var(--shadow-1);
+z-index: 1;
+}
+
+.skills-toggle::before {
+content: "";
+position: absolute;
+top: 5px;
+left: 5px;
+bottom: 5px;
+width: 93px;
+background: var(--raw-seinna);
+border-radius: 100px;
+transition: var(--transition-1);
+z-index: -1;
+}
+
+.skills-toggle.active::before {
+left: 98px;
+width: 94px;
+}
+
+.toggle-btn {
+color: var(--color-primary);
+font-family: var(--ff-poppins);
+padding: 5px 25px;
+transition: var(--transition-1);
+}
+
+.toggle-btn.active { color: var(--white); }
+
+.skills-box.active .skills-list,
+.skills-box .tools-list { display: none; }
+
+.skills-box .skills-list,
+.skills-box.active .tools-list {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+align-items: center;
+gap: 15px;
+animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+
+0% { opacity: 0; }
+100% { opacity: 1; }
+
+}
+
+.skill-card {
+position: relative;
+background: white;
+width: 80px;
+height: 80px;
+display: grid;
+place-items: center;
+border-radius: var(--radius-12);
+box-shadow: var(--shadow-1);
+cursor: help;
+}
+
+.skill-card:hover .tooltip {
+transform: translateY(0);
+opacity: 1;
+}
+
+
+
+
+
+/*-----------------------------------*\
+* #PROJECT
+\*-----------------------------------*/
+
+.project { padding-block: var(--section-padding); }
+
+.project-list > li { margin-bottom: 25px; }
+
+.project-card {
+position: relative;
+overflow: hidden;
+border-radius: var(--radius-12);
+box-shadow: 2px 4px 6px hsla(0, 0%, 0%, 0.2);
+}
+
+.project-card::after {
+content: "";
+position: absolute;
+inset: 0;
+border-radius: inherit;
+transition: var(--transition-1);
+}
+
+.project-card:is(:hover, :focus)::after {
+background: hsla(0, 0%, 100%, 0.441);
+backdrop-filter: blur(0.5px);
+}
+
+.project-card .card-content {
+
+position: absolute;
+left: 0;
+
+width: 100%;
+padding: 20px;
+}
+
+.project-card .card-title { margin-bottom: 10px; }
+
+.project-card :is(.card-title, .publish-date) {
+background: var(--bg-primary);
+padding: 6px 12px;
+width: max-content;
+box-shadow: var(--shadow-1);
+transform: translateY(20px);
+opacity: 0;
+transition: var(--transition-1);
+}
+
+.project-card .publish-date {
+font-size: var(--fs-6);
+color: var(--color-primary);
+transition-delay: 0s;
+}
+
+.project-card:is(:hover, :focus) :is(.card-title, .publish-date) {
+transform: translateY(0);
+opacity: 1;
+}
+
+.project-card:is(:hover, :focus) .publish-date { transition-delay: 0.1s; }
+
+.load-more {
+font-size: var(--fs-4);
+color: var(--raw-seinna);
+
+margin-inline: auto;
+}
+
+
+
+
+
+
+
+@media (min-width: 550px) {
+
+/**
+ * REUSED STYLE
+ */
+
+.container {
+  max-width: 550px;
+  margin-inline: auto;
+}
+
+.section-title { max-width: 380px; }
+
+
+
+/**
+ * PROJECT
+ */
+
+.project-list {
+  column-count: 2;
+  column-gap: 25px;
+}
+
+.project-list > li:first-child { column-span: all; }
+
+}
+
+
+
+
+
+/**
+* responsive for larger than 768px screen
+*/
+
+@media (min-width: 768px) {
+
+/**
+ * REUSED STYLE
+ */
+
+.container { max-width: 720px; }
+
+.section-title { max-width: 430px; }
+
+
+
+/**
+ * STATS
+ */
+
+.stats-list { grid-template-columns: 1fr 1fr; }
+
+
+
+/**
+ * ABOUT
+ */
+
+.btn-group {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+}
+
+.about .btn { max-width: max-content; }
+
+.about .btn-secondary { margin-bottom: 0; }
+
+
+
+/**
+ * CONTACT
+ */
+
+.contact-form {
+  max-width: 450px;
+  margin-inline: auto;
+}
+
+}
+
+
+
+
+
+/**
+* responsive for larger than 992px screen
+*/
+
+@media (min-width: 992px) {
+
+/**
+ * CUSTOM PROPERTY
+ */
+
+:root {
+
+  /**
+   * typography
+   */
+
+  --fs-2: 3rem;
+
+  /**
+   * spacing
+   */
+
+  --section-padding: 100px;
+
+}
+
+
+
+/**
+ * REUSED STYLE
+ */
+
+.container { max-width: 980px; }
+
+.section-content {
+  position: relative;
+  padding-left: 40px;
+}
+
+.section-subtitle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: rotate(0.75turn) translateX(-100%);
+  transform-origin: left top;
+  margin-bottom: 0;
+}
+
+.section-subtitle::after {
+  top: 8px;
+  left: auto;
+  right: calc(100% + 20px);
+}
+
+
+
+}
+
+
+
+/**
+ * STATS
+ */
+
+.stats-list { grid-template-columns: repeat(3, 1fr); }
+
+.stats-card { height: 100%; }
+
+
+
+
+/**
+ * ABOUT
+ */
+
+
+
+
+
+
+/**
+ * SKILLS
+ */
+
+.skills {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 50px;
+}
+
+.skills-content { margin-bottom: 0; }
+
+.skills-toggle { margin-inline: 0; }
+
+
+
+/**
+ * PROJECT
+ */
+
+.project-list { column-count: 3; }
+
+.project-list > li:first-child {
+  column-span: unset;
+  margin: 25px;
+  margin-left: 0;
+}
+
+
+
+/**
+ * CONTACT
+ */
+
+
+
+
+
+
+/**
+* responsive for larger than 1200px screen
+*/
+/* Add these styles to your existing styles or create a new CSS file */
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem 2rem; /* Adjust padding as needed */
+  background-color: #fff; /* Set your background color */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5rem;
+  color: #333; /* Set your logo color */
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+}
+
+.navbar a {
+  font-size: 1rem;
+  margin-left: 20px; /* Adjust the spacing between menu items */
+  text-decoration: none;
+  color: #333; /* Set your menu item color */
+  transition: color 0.3s ease-in-out;
+}
+
+.navbar a:hover,
+.navbar a.active {
+  color: #0ef; /* Set your active/hover color */
+}
+
+#menu-icon {
+  font-size: 1.5rem;
+  color: #333; /* Set your menu icon color */
+  cursor: pointer;
+  display: none; /* Hide the menu icon by default on larger screens */
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .header {
+    padding: 1rem;
+    justify-content: center;
+  }
+
+  .navbar {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 60px; /* Adjust as needed */
+    left: 0;
+    width: 100%;
+    background-color: #841818;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.navbar.show-nav {
+    display: flex;
+}
+.navbar a {
+    padding: 1rem 2rem; /* Adjust as needed */
+    text-align: center;
+}
+}
+
+.home{
+    
+    justify-content: center;
+    align-items: center;
+    padding:108px;
+    display:flex;
+ }
+
+ .home-img img{
+    width:35vw ;
+    animation: floatImage 4s ease-in-out infinite;
+ }
+
+ @keyframes floatImage{
+   0%{
+      transform: translateY(0);
+
+   }
+   50%{
+      transform: translateY(-2rem);
+   }
+   100%{
+      transform: translateY(0);
+   }
+
+ }
+
+ .home-content h3 {
+    font-size: 3.2rem;
+    font-weight: 700;
+
+ }
+ .home-content h3:nth-of-type(2){
+    margin-bottom: 2rem;
+ }
+
+ span{
+    color: var(--main-color);
+ }
+ .home-content h1{
+    font-size: 5.6rem;
+    font-weight: 700;
+    line-height: 1.3;
+ }
+ .social-media a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 4rem;
+    height: 4rem;
+    background: transparent;
+    border: .2rem solid #060606;
+    border-radius: 50%;
+    font-size: 2rem;
+    color: var(--main-color);
+    margin: 3rem 1.5rem 3rem 0;
+    transition: .5s ease;
+ }
+ .social-media a:hover{
+    background: rgb(162, 249, 255);
+    color: var(--second-bg-color);
+    /* box-shadow: 0 0 1rem var(--main-color); */
+ }
+
+ @media only screen and (max-width: 768px) {
+    .home {
+        flex-direction: column; /* Stack items vertically for smaller screens */
+        text-align: center; /* Center text for smaller screens */
+        padding: 77px; /* Adjust padding for smaller screens */
+    }
+
+    .home-img img {
+        width: 100%; /* Make the image take up the full width */
+        max-width: none; /* Remove max-width for the image */
+        
+    }
+
+    .social-media a {
+        margin: 1rem 0.5rem; /* Adjust margin for smaller screens */
+    }
+    .social-media{
+      display:flex;
+    }
+}
+
+
+
+
+
+
+
+ .section {
+  padding: 2rem 0 2rem;
+}
+
+.section_title {
+  font-size: 40px;
+  color: var(--title-color);
+}
+
+.section_subtitle {
+  display: block;
+  font-size: 20px;
+  margin-bottom: 3rem;
+  color:grey;
+}
+
+.section_title,
+.section_subtitle {
+  text-align: center;
+}
+
+.container {
+  max-width: 968px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
+.qualification_container {
+  max-width: 768px;
+}
+
+.qualification_tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--mb-2);
+}
+
+.qualification_education-button,
+.qualification_experience-button {
+  font-size: var(--h3-font-size);
+  font-weight: var(--font-medium);
+  color: var(--title-color);
+  margin: 0 var(--mb-1);
+  cursor: pointer;
+  font-size:17px;
+}
+
+.qualification_education-button:hover,
+.qualification_experience-button:hover {
+  color: var(--title-color-dark);
+  font-weight: var(--font-semi-bold);
+  font-size:20px;
+}
+
+.qualification_icon {
+  font-size: 1.8rem;
+  margin-right: var(--mb-0-25);
+}
+
+.qualification_active {
+  color: var(--title-color-dark);
+  font-weight: var(--font-semi-bold);
+}
+
+.qualification_section {
+  display: grid;
+  grid-template: 0.5fr;
+  justify-content: center;
+}
+
+.qualification_education-content,
+.qualification_experience-content {
+  display: none;
+  font-size:17px;
+}
+
+.qualification_content-active {
+  display: block;
+  font-size:17px;
+  margin-left:19px;
+}
+
+.qualification_data {
+  display: grid;
+  grid-template-columns: 1fr max-content 1fr;
+  column-gap: 1.5rem;
+  font-size:17px;
+  margin-top:14px;
+}
+
+.qualification_title {
+  font-size: 15px;
+  font-weight: var(--font-medium);
+}
+
+.qualification_subtitle {
+  display: inline-block;
+  font-size: 12px;
+  margin-bottom: var(--mb-0-25);
+  color:rgb(79, 74, 74)
+}
+
+.qualification_calender {
+  font-size: 10px;
+  margin-bottom: var(--mb-1);
+}
+
+.qualification_calender i {
+  padding-right: 0.5rem;
+}
+
+.qualification_rounder {
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  background-color: grey;
+  border-radius: 50%;
+}
+
+.qualification_line {
+  display: block;
+  width: 1px;
+  height: 100%;
+  background-color: grey;
+  transform: translate(6px, -7px);
+}
+.contact { padding-block: var(--section-padding); }
+
+.contact-content { margin-bottom: 50px;margin-left: 31px; }
+
+.contact-list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.contact-item-icon {
+  font-size: 25px;
+  color: var(--color-primary);
+}
+
+.contact-item-icon ion-icon { --ionicon-stroke-width: 40px; }
+
+.contact-item-title { margin-bottom: 10px; }
+
+.contact-list-item .contact-info {
+  color: var(--color-secondary);
+  font-style: normal;
+  line-height: 1.6;
+  transition: var(--transition-1);
+}
+
+.contact-info:not(address):is(:hover, :focus) { color: var(--color-primary); }
+
+.contac-social-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 15px;
+  padding-inline: 40px;
+}
+
+.contact-social-link {
+  position: relative;
+  background: var(--color-primary);
+  color: var(--bg-primary);
+  width: 35px;
+  height: 35px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  transition: var(--transition-1);
+}
+
+.contact-social-link:is(:hover, :focus) {
+  background: var(--raw-seinna);
+  color: var(--white);
+}
+
+.contact-social-link:is(:hover, :focus) .tooltip {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.contact-form {
+  background: #00eeff1c;;
+  padding: 20px;
+  border-radius: var(--radius-12);
+  box-shadow: var(--shadow-1);
+  margin-top: -484px;
+    margin-right: -106px;
+}
+
+.form-wrapper { margin-bottom: 25px; }
+
+.form-label {
+  color: var(--color-primary);
+  font-size: var(--fs-7);
+  font-family: var(--ff-poppins);
+  margin-bottom: 8px;
+  margin-left: 5px;
+}
+
+.input-wrapper { position: relative; }
+
+.input-field {
+  background: var(--input-bg);
+  color: var(--raw-seinna);
+  padding: 10px;
+  padding-left: 40px;
+  border-radius: var(--radius-12);
+  transition: var(--transition-1);
+}
+
+.input-wrapper ion-icon {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: var(--color-secondary);
+  font-size: 20px;
+  transition: var(--transition-1);
+}
+
+textarea.input-field {
+  min-height: 60px;
+  height: 120px;
+  max-height: 200px;
+  resize: vertical;
+}
+
+.input-field:focus { outline: 1px solid; }
+
+.input-field:focus + ion-icon { color: var(--raw-seinna); }
+
+.contact .btn-primary {
+  max-width: unset;
+  width: 100%;
+  background: var(--color-primary);
+  color: var(--bg-primary);
+}
+
+
+
+@media only screen and (max-width: 768px) {
+  .qualification_education-content, .qualification_experience-content {
+   
+    margin-left: 19px;
+}
+ 
+  .qualification_content-active{
+    margin-left:19px;
+  }
+  .skills-content{
+    margin-left: 10px;
+  }
+  .skills-list{
+    gap:21px;
+  }
+  .project-list {
+    margin-left: 10px;
+    column-count: 2;
+}
+  .contact {
+    padding-block: 10px; /* Adjust padding for smaller screens */
+  }
+
+  .contact-form {
+    max-width: none;
+    margin-top: 0;
+    margin-right: 51px;
+    margin-left: 51px;
+  }
+
+  .form-wrapper,
+  .contact-list-item {
+    margin-bottom: 15px; /* Adjust margin for smaller screens */
+  }
+
+  .input-field,
+  textarea.input-field {
+    padding: -5px; /* Adjust padding for smaller screens */
+  }
+  .contect-content{
+    margin-left: 31px;
+  }
+  .contact-list{
+   margin-left: 23px;
+   
+  }
+}
+
+
+    </style>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Harini</title>
+
+  <!-- 
+    - favicon
+  -->
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+
+  <!-- 
+    - custom css link
+  -->
+  <link rel="stylesheet" href="./assets/css/style.css">
+
+  <!-- 
+    - google font link
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto:wght@400;700&family=Saira+Stencil+One&display=swap"
+    rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" type="text/css" href="style.css">
+
+</head>
+
+<body id="top" class="dark_theme">
+    <header class="header">
+        <a href="#" class="logo">Portfolio</a>
+        <i class='bx bx-menu' id="menu-icon"></i>
+        <nav class="navbar">
+            <a href="#home">HOME</a>
+           
+            <a href="#qualification">QUALIFICATION</a>
+            <a href="#skills">SKILLS</a>
+            <a href="#portfolio">PROJECTS</a>
+            <a href="#contact">CONTACT</a>
+        </nav>
+    </header>
+    <script>
+      document.getElementById('menu-icon').addEventListener('click', function () {
+          document.querySelector('.navbar').classList.toggle('menu-open');
+      });
+  </script>
+  
+
+    <section class="home" id="home">
+        <div class="home-content">
+            <h3>Hello,It's Me</h3>
+            <h1>Harini</h1>
+            <h3>And I'm a <span class="multiple-text" style="color:#0ef;"><br></span></h3>
+            <div class="social-media">
+                <a href="https://github.com/HariniM29/"><i class='bx bxl-github'></i></a>
+                <a href="mailto:harini200329@gmail.com"><i class='bx bxs-envelope'></i>
+                <script>
+                 document.getElementsByClassName('bx bxs-envelope').addEventListener('click', function() {
+                window.location.href = 'mailto:harini200329@gmail.com';
+            });
+        </script></a>
+
+                <a href="https://api.whatsapp.com/send?phone=+918610269481"><i class='bx bxl-whatsapp' ></i></a>
+                <a href="https://www.linkedin.com/in/harini-m-bb018b24a"><i class='bx bxl-linkedin-square' ></i></a>
+            </div>
+          
+        </div>
+        <div class="home-img">
+            <img src="/public/homelogo.jpg" alt="">
+        </div>
+    </section>
+    
+    <script>
+        // Add this script at the end of your HTML body or in the head after the content has loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            animateText();
+        });
+
+        function animateText() {
+            const textSpan = document.querySelector('.multiple-text');
+            const textContentArray = ['Student', 'Frontend developer'];
+            let phraseIndex = 0;
+            let charIndex = 0;
+
+            function type() {
+                textSpan.textContent = textContentArray[phraseIndex].slice(0, charIndex++);
+                if (charIndex <= textContentArray[phraseIndex].length) {
+                    setTimeout(type, 100);
+                } else {
+                    setTimeout(reset, 1000); // Add a delay of 1 second after typing
+                }
+            }
+
+            function reset() {
+                charIndex = 0;
+                phraseIndex = (phraseIndex + 1) % textContentArray.length;
+                setTimeout(type, 1000); // Add a delay of 1 second before starting the next phrase
+            }
+
+            type();
+        }
+
+
+        //qualifi
+
+
+        
+    </script>
+
+<section class="qualification section" id="qualification">
+    <h2 class="section_title">Qualification</h2>
+    <span class="section_subtitle">My personal journey</span>
+
+    <div class="qualification_container container">
+      <div class="qualification_tabs">
+        <div
+          class="qualification_education-button qualification_active button--flex"
+        >
+          <i class="uil uil-graduation-cap qualification_icon"></i>Education
+        </div>
+           &nbsp;
+        <div class="qualification_experience-button button--flex">
+          <i class="uil uil-briefcase-alt qualification_icon"></i>  Experience
+        </div>
+      </div>
+
+      <div class="qualification_section">
+        <div
+          class="qualification_education-content qualification_content-active"
+        >
+          <div class="qualification_data">
+            <div>
+              <h3 class="qualification_title">B.Tech IT</h3>
+              <span class="qualification_subtitle"
+                >Velammal Institute of Technology,Chennai</span
+              >
+              <div class="qualification_calender">
+                <i class="uil uil-calendar-alt"></i>2025<br><br>Grade/CGPA-9.29
+              </div>
+            </div>
+            <div>
+              <span class="qualification_rounder"></span>
+              <span class="qualification_line"></span>
+            </div>
+          </div>
+
+          <div class="qualification_data">
+            <div></div>
+            <div>
+              <span class="qualification_rounder"></span>
+              <span class="qualification_line"></span>
+            </div>
+            <div>
+              <h3 class="qualification_title">HSC</h3>
+              <span class="qualification_subtitle"
+                >GRT Mahalakshmi 
+                Vidyalaya,
+                Chennai.</span
+              >
+              <div class="qualification_calender">
+                <i class="uil uil-calendar-alt"></i>2021<br><br>Grade/CGPA-91%
+              </div>
+            </div>
+          </div>
+
+          <div class="qualification_data">
+            <div>
+              <h3 class="qualification_title">SSLC</h3>
+              <span class="qualification_subtitle"
+                >St.Dominic’s Anglo In 
+                Hr Sec School,
+                Chennai.</span
+              >
+              <div class="qualification_calender">
+                <i class="uil uil-calendar-alt"></i>2019<br><br>Grade/CGPA-91%
+              </div>
+          
+            </div>
+
+                
+            <div>
+              <span class="qualification_rounder"></span>
+              <span class="qualification_line"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="qualification_experience-content">
+          <div class="qualification_data">
+            <div>
+              <h3 class="qualification_title">Intern</h3>
+              <span class="qualification_subtitle">Bharat intern</span>
+              <div class="qualification_calender">
+                <i class="uil uil-calendar-alt"></i> April 2023-May 2023
+              </div>
+            </div>
+            <div>
+              <span class="qualification_rounder"></span>
+              <span class="qualification_line"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<script>
+    let education_button = document.querySelector(
+   '.qualification_education-button'
+ );
+ let experience_button = document.querySelector(
+   '.qualification_experience-button'
+ );
+ let experience_content = document.querySelector(
+   '.qualification_experience-content'
+ );
+ let education_content = document.querySelector(
+   '.qualification_education-content'
+ );
+ 
+ 
+ 
+ education_button.onclick = () => {
+   education_button.classList.add('qualification_active');
+   experience_button.classList.remove('qualification_active');
+   education_content.classList.add('qualification_content-active');
+   experience_content.classList.remove('qualification_content-active');
+ };
+ 
+ experience_button.onclick = () => {
+   experience_button.classList.add('qualification_active');
+   education_button.classList.remove('qualification_active');
+   education_content.classList.remove('qualification_content-active');
+   experience_content.classList.add('qualification_content-active');
+ };
+ 
+</script>
+  
+
+      </div>
+
+      <button class="nav-toggle-btn" aria-label="Toggle Menu" title="Toggle Menu" data-nav-toggle-btn>
+        <span class="one"></span>
+        <span class="two"></span>
+        <span class="three"></span>
+      </button>
+
+      
+
+    </div>
+  
+
+
+
+
+
+  <main>
+    <article class="container">
+
+      
+
+      
+
+      <!-- 
+        - #SKILLS
+      -->
+
+      <section class="skills" id="skills">
+        
+
+        <div class="skills-content section-content">
+
+          <p class="section-subtitle">My skills</p>
+
+          <h2 class="h3 section-title">What My Programming Skills Included?</h2>
+
+          <p class="section-text">
+            I develop simple, intuitive and responsive user interface that helps users get things done with less effort
+            and time
+            with those technologies.
+          </p>
+
+          <div class="skills-toggle" data-toggle-box>
+            <button class="toggle-btn active" data-toggle-btn>Skills</button>
+
+            <button class="toggle-btn" data-toggle-btn>Tools</button>
+          </div>
+
+        </div>
+
+        <div class="skills-box" data-skills-box>
+
+          <ul class="skills-list">
+
+            <li>
+              <div class="skill-card">
+                <div class="tooltip">HTML5</div>
+
+                <div class="card-icon">
+                  <img src="/public/html1.png" alt="HTML5 logo" style="width:40px";>
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <div class="skill-card">
+                <div class="tooltip">CSS3</div>
+
+                <div class="card-icon">
+                  <img src="/public/css.png" alt="CSS3 logo" style="width:40px";>
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <div class="skill-card">
+                <div class="tooltip">JavaScript</div>
+
+                <div class="card-icon">
+                  <img src="/public/js.png" alt="JavaScript logo" style="width:40px";>
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <div class="skill-card">
+                <div class="tooltip">NodeJS</div>
+
+                <div class="card-icon">
+                  <img src="/public/nodejs.png" alt="nodejs" style="width:40px";>
+                </div>
+              </div>
+            </li>
+
+            
+
+          </ul>
+
+          <ul class="tools-list">
+
+            <li>
+              <div class="skill-card">
+                <div class="tooltip">GitHUb</div>
+
+                <div class="card-icon">
+                  <img src="/public/github.png" alt="github" style="width:40px";>
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <div class="skill-card">
+                <div class="tooltip">Figma</div>
+
+                <div class="card-icon">
+                  <img src="/public/figma.png" alt="figma" style="width:40px";>
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <div class="skill-card">
+                <div class="tooltip">PowerBi</div>
+
+                <div class="card-icon">
+                  <img src="/public/powerbi.png" alt="Powerbi" style="width:40px";>
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <div class="skill-card">
+                <div class="tooltip">Canva</div>
+
+                <div class="card-icon">
+                  <img src="/public/canva.png" alt="Git logo" style="width:40px";>
+                </div>
+              </div>
+            </li>
+
+           
+
+          </ul>
+
+        </div>
+
+      </section>
+
+
+
+
+
+      <!-- 
+        - #PROJECTS
+      -->
+
+      <section class="project" id="portfolio">
+
+        <ul class="project-list">
+
+          <li>
+            <div class="project-content section-content">
+
+              <p class="section-subtitle">My Works</p>
+
+              <h2 class="h3 section-title">See My Works Which Will Amaze You!</h2>
+
+              <p class="section-text">
+                Discover my journey into web technologies. From learning to hands-on projects, witness the growth in every line of code.
+              </p>
+
+            </div>
+          </li>
+
+          <li>
+            <a href="https://zappy-photos.onrender.com/" class="project-card">
+
+              <figure class="card-banner">
+                <img src="/public/zappy1.jpg" class="w-100" alt="" >
+              </figure>
+
+              <div class="card-content">
+                <h3 class="h4 card-title"></h3>
+
+                <time class="publish-date" datetime="2022-04">April 2022</time>
+              </div>
+
+            </a>
+          </li>
+
+          <li>
+            <a href="https://www.figma.com/proto/PMGTAxWDwI3ReNl5d3egd7/iete?type=design&node-id=140-6311&t=dXCNO1iCQc4iYCgx-0&scaling=scale-down&page-id=0%3A1&starting-point-node-id=140%3A6311" class="project-card">
+
+              <figure class="card-banner">
+                <img src="/public/IETE2.jpg" class="w-100" alt=".">
+               
+              </figure>
+
+              <div class="card-content">
+                <h3 class="h4 card-title"></h3>
+
+                <time class="publish-date" datetime="2022-04">April 2022</time>
+              </div>
+
+            </a>
+          </li>
+         
+          <li>
+            <a href="https://harinim29.github.io/netflixclone/" class="project-card">
+
+              <figure class="card-banner">
+                <img src="/public/netflix1.jpg" class="w-100"
+                  alt="">
+              </figure>
+
+              <div class="card-content">
+                <h3 class="h4 card-title"></h3>
+
+                <time class="publish-date" datetime="2022-04">April 2022</time>
+              </div>
+
+            </a>
+          </li>
+          <li>
+            <a href="https://harinim29.github.io/qr/" class="project-card">
+
+              <figure class="card-banner">
+                <img src="/public/qrgenerator.jpg" class="w-100"
+                  alt="">
+              </figure>
+
+              <div class="card-content">
+                <h3 class="h4 card-title"></h3>
+
+                <time class="publish-date" datetime="2022-04">April 2022</time>
+              </div>
+
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/HariniM29/Authentication_System_nodejs" class="project-card">
+
+              <figure class="card-banner">
+                <img src="/public/authen.jpg" class="w-100"
+                  alt="">
+              </figure>
+
+              <div class="card-content">
+                <h3 class="h4 card-title"></h3>
+
+                <time class="publish-date" datetime="2022-04">2023</time>
+              </div>
+
+            </a>
+          </li>
+          <li>
+            <a href="https://harinim29.github.io/calci/" class="project-card">
+
+              <figure class="card-banner">
+                <img src="/public/calci1.jpg" class="w-100"
+                  alt="Blue digital watch on a dark liver background.">
+              </figure>
+
+              <div class="card-content">
+                <h3 class="h4 card-title"></h3>
+
+                <time class="publish-date" datetime="2022-04"> 2023</time>
+              </div>
+
+            </a>
+          </li>
+
+          <li>
+            <a href="https://harinim29.github.io/text-to-speech-converter/" class="project-card">
+
+              <figure class="card-banner">
+                <img src="/public/texttospeech.jpg" class="w-100"
+                  alt="">
+              </figure>
+
+              <div class="card-content">
+                <h3 class="h4 card-title"></h3>
+
+                <time class="publish-date" datetime="2022-04"></time>
+              </div>
+
+            </a>
+          </li>
+
+          <li>
+            <a href="https://github.com/HariniM29/store-sales-dashboard-power-bi" class="project-card">
+
+              <figure class="card-banner">
+                <img src="/public/powerbi1.jpg" class="w-100"
+                  alt="">
+              </figure>
+
+              <div class="card-content">
+                <h3 class="h4 card-title"></h3>
+
+                <time class="publish-date" datetime="2022-04"></time>
+              </div>
+
+            </a>
+          </li>
+
+          <li>
+            <a href="https://harinim29.github.io/tempconvertor/" class="project-card">
+
+              <figure class="card-banner">
+                <img src="/public/temp1.jpg" class="w-100"
+                  alt="">
+              </figure>
+
+              <div class="card-content">
+                <h3 class="h4 card-title"></h3>
+
+                <time class="publish-date" datetime="2022-04"></time>
+              </div>
+
+            </a>
+          </li>
+
+          <li>
+            <button class="load-more">Loading...</button>
+          </li>
+
+        </ul>
+
+      </section>
+
+
+
+
+
+      <!-- 
+        - #CONTACT
+      -->
+      <section class="contact" id="contact">
+
+        <div class="contact-content section-content">
+
+          <p class="section-subtitle">Contact</p>
+
+          <h2 class="h3 section-title">Have  Any Project?<br> Please Drop a Message</h2>
+
+          <p class="section-text">
+            Get in touch and let me know how i can help.
+          </p>
+
+          <ul class="contact-list">
+
+            <li class="contact-list-item">
+
+              <div class="contact-item-icon">
+                <ion-icon name="location-outline"></ion-icon>
+              </div>
+
+              <div class="wrapper">
+                <h3 class="h4 contact-item-title">Address:</h3>
+
+                <address class="contact-info">
+                  Guindy,Chennai
+                </address>
+              </div>
+
+            </li>
+
+            <li class="contact-list-item">
+
+              <div class="contact-item-icon">
+                <ion-icon name="call-outline"></ion-icon>
+              </div>
+
+              <div class="wrapper">
+                <h3 class="h4 contact-item-title">Phone:</h3>
+
+                <a href="tel:01234567789" class="contact-info">8610269481</a>
+
+                
+              </div>
+
+            </li>
+
+            <li class="contact-list-item">
+
+              <div class="contact-item-icon">
+                <ion-icon name="mail-outline"></ion-icon>
+              </div>
+
+              <div class="wrapper">
+                <h3 class="h4 contact-item-title">Email:</h3>
+
+                <a href="mailto:harini200329@gmail.com" class="contact-info">harini200329@gmail.com</a>
+
+                
+              </div>
+
+            </li>
+
+           
+            </li>
+
+          </ul>
+
+        </div>
+
+        <form action="/submit" method="post" class="contact-form">
+
+          <div class="form-wrapper">
+
+            <label for="name" class="form-label">Name</label>
+
+            <div class="input-wrapper">
+
+              <input type="text" name="name" id="name" required placeholder="e.g harini" class="input-field">
+
+              <ion-icon name="person-circle"></ion-icon>
+
+            </div>
+
+          </div>
+
+          <div class="form-wrapper">
+
+            <label for="email" class="form-label">Email</label>
+
+            <div class="input-wrapper">
+
+              <input type="email" name="email" id="email" required placeholder="e.g harini200329@mail.com"
+                class="input-field">
+
+              <ion-icon name="mail"></ion-icon>
+
+            </div>
+
+          </div>
+
+          <div class="form-wrapper">
+
+            <label for="phone" class="form-label">Phone</label>
+
+            <div class="input-wrapper">
+
+              <input type="tel" name="phone" id="phone" required placeholder="Phone Number" class="input-field">
+
+              <ion-icon name="call"></ion-icon>
+
+            </div>
+
+          </div>
+
+          <div class="form-wrapper">
+
+            <label for="message" class="form-label">Message</label>
+
+            <div class="input-wrapper">
+
+              <textarea name="message" id="message" required placeholder="Write message..."
+                class="input-field"></textarea>
+
+              <ion-icon name="chatbubbles"></ion-icon>
+
+            </div>
+
+          </div>
+
+          <button type="submit" class="btn btn-primary">Send</button>
+
+        </form>
+
+      </section>
+
+  
+
+
+
+
+
+  <!-- 
+    - #FOOTER
+  -->
+
+      
+
+
+  
+
+  
+
+
+
+  <!-- 
+    - custom js link
+  -->
+  <script src="./assets/js/script.js"></script>
+
+  <!-- 
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+   <script>
+    'use strict';
+
+/**
+ * element toggle function
+ */
+
+const elemToggleFunc = function (elem) { elem.classList.toggle("active"); }
+
+
+
+/**
+ * header sticky & go to top
+ */
+
+// const header = document.querySelector("[data-header]");
+// const goTopBtn = document.querySelector("[data-go-top]");
+
+// window.addEventListener("scroll", function () {
+
+//   if (window.scrollY >= 10) {
+//     header.classList.add("active");
+//     goTopBtn.classList.add("active");
+//   } else {
+//     header.classList.remove("active");
+//     goTopBtn.classList.remove("active");
+//   }
+
+// });
+// const header = document.querySelector(".header");
+// const goTopBtn = document.querySelector("[data-go-top]");
+// const menuToggleBtn = document.querySelector("[data-nav-toggle-btn]");
+// // const navbar = document.querySelector(".navbar");
+
+// // Scroll event listener
+// window.addEventListener("scroll", function () {
+//   if (window.scrollY >= 10) {
+//     header.classList.add("active");
+//     goTopBtn.classList.add("active");
+//   } else {
+//     header.classList.remove("active");
+//     goTopBtn.classList.remove("active");
+//   }
+// });
+
+// // Toggle mobile navigation
+// menuToggleBtn.addEventListener("click", function () {
+//   navbar.classList.toggle("show-nav");
+// });
+
+
+
+/**
+ * navbar toggle
+ */
+
+const navToggleBtn = document.querySelector("[data-nav-toggle-btn]");
+const navbar = document.querySelector("[data-navbar]");
+
+navToggleBtn.addEventListener("click", function () {
+
+  elemToggleFunc(navToggleBtn);
+  elemToggleFunc(navbar);
+  elemToggleFunc(document.body);
+
+});
+const header = document.querySelector(".header");
+const goTopBtn = document.querySelector("[data-go-top]");
+const menuToggleBtn = document.querySelector("[data-nav-toggle-btn]");
+
+
+// Scroll event listener
+window.addEventListener("scroll", function () {
+    if (window.scrollY >= 10) {
+        header.classList.add("active");
+        goTopBtn.classList.add("active");
+    } else {
+        header.classList.remove("active");
+        goTopBtn.classList.remove("active");
+    }
+});
+
+// Toggle mobile navigation
+menuToggleBtn.addEventListener("click", function () {
+    navbar.classList.toggle("show-nav");
+});
+
+
+
+/**
+ * skills toggle
+ */
+
+const toggleBtnBox = document.querySelector("[data-toggle-box]");
+const toggleBtns = document.querySelectorAll("[data-toggle-btn]");
+const skillsBox = document.querySelector("[data-skills-box]");
+
+for (let i = 0; i < toggleBtns.length; i++) {
+  toggleBtns[i].addEventListener("click", function () {
+
+    elemToggleFunc(toggleBtnBox);
+    for (let i = 0; i < toggleBtns.length; i++) { elemToggleFunc(toggleBtns[i]); }
+    elemToggleFunc(skillsBox);
+
+  });
+}
+
+
+
+/**
+ * dark & light theme toggle
+ */
+
+const themeToggleBtn = document.querySelector("[data-theme-btn]");
+
+themeToggleBtn.addEventListener("click", function () {
+
+  elemToggleFunc(themeToggleBtn);
+
+  if (themeToggleBtn.classList.contains("active")) {
+    document.body.classList.remove("dark_theme");
+    document.body.classList.add("light_theme");
+
+    localStorage.setItem("theme", "light_theme");
+  } else {
+    document.body.classList.add("dark_theme");
+    document.body.classList.remove("light_theme");
+
+    localStorage.setItem("theme", "dark_theme");
+  }
+
+});
+
+/**
+ * check & apply last time selected theme from localStorage
+ */
+
+if (localStorage.getItem("theme") === "light_theme") {
+  themeToggleBtn.classList.add("active");
+  document.body.classList.remove("dark_theme");
+  document.body.classList.add("light_theme");
+} else {
+  themeToggleBtn.classList.remove("active");
+  document.body.classList.remove("light_theme");
+  document.body.classList.add("dark_theme");
+}
+   </script>
+</body>
+
+</html>
